@@ -1,12 +1,43 @@
-import { Box, Stack, Typography, TextField, Button } from "@mui/material";
+import { useState } from "react";
+import { createUserWithEmailAndPassword } from "firebase/auth";
+import { auth, errorCodeMapper } from "../config/firebase";
+
+import { Box, Stack, Typography, TextField } from "@mui/material";
+import { LoadingButton } from "@mui/lab";
+import Alert from "./Alert";
 
 const Register = () => {
-  const handleSubmit = (e) => {
+  const [isLoading, setIsLoading] = useState(false);
+  const [alertData, setAlertData] = useState({
+    isOpen: false,
+    type: "",
+    message: "",
+  });
+
+  const handleSubmit = async (e) => {
+    setIsLoading(true);
     e.preventDefault();
     const displayName = e.target.displayName.value;
     const email = e.target.email.value;
     const password = e.target.password.value;
-    console.log(displayName, email, password);
+
+    try {
+      const response = await createUserWithEmailAndPassword(
+        auth,
+        email,
+        password
+      );
+
+      console.log(response);
+    } catch (error) {
+      setAlertData({
+        isOpen: true,
+        type: "error",
+        message: errorCodeMapper(error.code),
+      });
+    }
+
+    setIsLoading(false);
   };
 
   return (
@@ -42,11 +73,16 @@ const Register = () => {
             variant="outlined"
             required
           />
-          <Button variant="outlined" type="submit">
+          <LoadingButton loading={isLoading} variant="outlined" type="submit">
             Register
-          </Button>
+          </LoadingButton>
         </Stack>
       </form>
+      <Alert
+        isOpen={alertData.isOpen}
+        type={alertData.type}
+        message={alertData.message}
+      />
     </Box>
   );
 };
