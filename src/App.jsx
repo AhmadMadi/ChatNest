@@ -9,6 +9,8 @@ import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
 import { auth, errorCodeMapper } from "./config/firebase";
 
 import { Container } from "@mui/material";
+import { ThemeProvider, createTheme } from "@mui/material/styles";
+import CssBaseline from "@mui/material/CssBaseline";
 
 import Register from "./components/Register";
 import Alert from "./components/Alert";
@@ -53,19 +55,28 @@ function App() {
     setIsLoading(false);
   };
 
+  const darkTheme = createTheme({
+    palette: {
+      mode: "dark",
+    },
+  });
+
   return (
-    <Container maxWidth="lg">
-      {user ? (
-        <>Hello!!!</>
-      ) : (
-        <Register handleSubmit={handleSubmit} isLoading={isLoading} />
-      )}
-      <Alert
-        isOpen={alertData.isOpen}
-        type={alertData.type}
-        message={alertData.message}
-      />
-    </Container>
+    <ThemeProvider theme={darkTheme}>
+      <CssBaseline />
+      <Container maxWidth="lg">
+        {user ? (
+          <>Hello!!!</>
+        ) : (
+          <Register handleSubmit={handleSubmit} isLoading={isLoading} />
+        )}
+        <Alert
+          isOpen={alertData.isOpen}
+          type={alertData.type}
+          message={alertData.message}
+        />
+      </Container>
+    </ThemeProvider>
   );
 }
 
