@@ -1,49 +1,9 @@
-import { useState } from "react";
-import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
-import { auth, errorCodeMapper } from "../config/firebase";
-
 import { Box, Stack, Typography, TextField } from "@mui/material";
 import { LoadingButton } from "@mui/lab";
-import Alert from "./Alert";
 
-const Register = () => {
-  const [isLoading, setIsLoading] = useState(false);
-  const [alertData, setAlertData] = useState({
-    isOpen: false,
-    type: "",
-    message: "",
-  });
+import PropTypes from "prop-types";
 
-  const handleSubmit = async (e) => {
-    setIsLoading(true);
-    e.preventDefault();
-    const displayName = e.target.displayName.value;
-    const email = e.target.email.value;
-    const password = e.target.password.value;
-
-    try {
-      const response = await createUserWithEmailAndPassword(
-        auth,
-        email,
-        password
-      );
-
-      console.log(response);
-
-      await updateProfile(response.user, {
-        displayName,
-      });
-    } catch (error) {
-      setAlertData({
-        isOpen: true,
-        type: "error",
-        message: errorCodeMapper(error.code),
-      });
-    }
-
-    setIsLoading(false);
-  };
-
+const Register = (props) => {
   return (
     <Box
       sx={{
@@ -53,7 +13,7 @@ const Register = () => {
         alignItems: "center",
       }}
     >
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={props.handleSubmit}>
         <Stack
           spacing={2}
           sx={{
@@ -77,18 +37,22 @@ const Register = () => {
             variant="outlined"
             required
           />
-          <LoadingButton loading={isLoading} variant="outlined" type="submit">
+          <LoadingButton
+            loading={props.isLoading}
+            variant="outlined"
+            type="submit"
+          >
             Register
           </LoadingButton>
         </Stack>
       </form>
-      <Alert
-        isOpen={alertData.isOpen}
-        type={alertData.type}
-        message={alertData.message}
-      />
     </Box>
   );
 };
 
 export default Register;
+
+Register.propTypes = {
+  handleSubmit: PropTypes.func.isRequired,
+  isLoading: PropTypes.bool.isRequired,
+};
