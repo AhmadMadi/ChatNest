@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { createUserWithEmailAndPassword } from "firebase/auth";
+import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
 import { auth, errorCodeMapper } from "../config/firebase";
 
 import { Box, Stack, Typography, TextField } from "@mui/material";
@@ -29,6 +29,10 @@ const Register = () => {
       );
 
       console.log(response);
+
+      await updateProfile(response.user, {
+        displayName,
+      });
     } catch (error) {
       setAlertData({
         isOpen: true,
