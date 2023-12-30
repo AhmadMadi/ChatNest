@@ -14,6 +14,7 @@ import CssBaseline from "@mui/material/CssBaseline";
 
 import Register from "./components/Register";
 import Alert from "./components/Alert";
+import Chat from "./pages/Chat";
 
 function App() {
   const [user, setUser] = useState(null);
@@ -66,7 +67,7 @@ function App() {
       <CssBaseline />
       <Container maxWidth="lg">
         {user ? (
-          <>Hello!!!</>
+          <Chat />
         ) : (
           <Register handleSubmit={handleSubmit} isLoading={isLoading} />
         )}
