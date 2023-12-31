@@ -7,7 +7,11 @@ const Alert = (incomingProps) => {
   });
 
   return (
-    <Snackbar open={incomingProps.isOpen} autoHideDuration={4000}>
+    <Snackbar
+      open={incomingProps.isOpen}
+      autoHideDuration={4000}
+      onClose={incomingProps.onAlertClose}
+    >
       <Alert severity={incomingProps.type}>{incomingProps.message}</Alert>
     </Snackbar>
   );
