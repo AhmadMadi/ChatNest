@@ -1,9 +1,64 @@
+import { useState, useContext } from "react";
 import { Box, Stack, Typography, TextField } from "@mui/material";
 import { LoadingButton } from "@mui/lab";
 
-import PropTypes from "prop-types";
+import { signup, signin } from "../api";
+import Alert from "../components/Alert";
+import { errorCodeMapper } from "../config/firebase";
+import UserContext from "../context/UserContext";
 
-const Register = (props) => {
+const Register = () => {
+  const [isSignUp, setIsSignUp] = useState(true);
+  const [isLoading, setIsLoading] = useState(false);
+  const [alertData, setAlertData] = useState({
+    isOpen: false,
+    type: "",
+    message: "",
+  });
+
+  const { setUser } = useContext(UserContext);
+
+  const onAlertClose = () => {
+    setAlertData({
+      ...alertData,
+      isOpen: false,
+    });
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setIsLoading(true);
+
+    const displayName = e.target.displayName?.value || "";
+    const email = e.target.email.value;
+    const password = e.target.password.value;
+
+    try {
+      let user = {};
+
+      switch (isSignUp) {
+        case true:
+          user = await signup({ displayName, email, password });
+          break;
+        case false:
+          user = await signin({ email, password });
+          break;
+        default:
+          break;
+      }
+
+      setUser(user);
+    } catch (error) {
+      setAlertData({
+        isOpen: true,
+        type: "error",
+        message: errorCodeMapper(error.code),
+      });
+    }
+
+    setIsLoading(false);
+  };
+
   return (
     <Box
       sx={{
@@ -13,7 +68,7 @@ const Register = (props) => {
         alignItems: "center",
       }}
     >
-      <form onSubmit={props.handleSubmit}>
+      <form onSubmit={handleSubmit}>
         <Stack
           spacing={2}
           sx={{
@@ -22,14 +77,16 @@ const Register = (props) => {
           }}
         >
           <Typography variant="h6" sx={{ alignSelf: "center" }}>
-            Create account
+            {isSignUp ? "Create account" : "Welcome back!"}
           </Typography>
-          <TextField
-            id="displayName"
-            label="Display Name"
-            variant="outlined"
-            required
-          />
+          {isSignUp && (
+            <TextField
+              id="displayName"
+              label="Display Name"
+              variant="outlined"
+              required
+            />
+          )}
           <TextField id="email" label="Email" variant="outlined" required />
           <TextField
             id="password"
@@ -37,22 +94,28 @@ const Register = (props) => {
             variant="outlined"
             required
           />
-          <LoadingButton
-            loading={props.isLoading}
-            variant="outlined"
-            type="submit"
-          >
-            Register
+          <LoadingButton loading={isLoading} variant="outlined" type="submit">
+            {isSignUp ? "Register" : "Login"}
           </LoadingButton>
+          <Typography
+            variant="body2"
+            sx={{ cursor: "pointer" }}
+            onClick={() => setIsSignUp(!isSignUp)}
+          >
+            {isSignUp
+              ? "Already have an account? Click here."
+              : "No account? Click here."}
+          </Typography>
         </Stack>
       </form>
+      <Alert
+        isOpen={alertData.isOpen}
+        type={alertData.type}
+        message={alertData.message}
+        onAlertClose={onAlertClose}
+      />
     </Box>
   );
 };
 
 export default Register;
-
-Register.propTypes = {
-  handleSubmit: PropTypes.func.isRequired,
-  isLoading: PropTypes.bool.isRequired,
-};
