@@ -1,9 +1,12 @@
 import * as React from "react";
 import { styled } from "@mui/material/styles";
-import { Box, Typography, TextField, Button } from "@mui/material";
+import { Box, TextField, Button } from "@mui/material";
+import { db } from "../config/firebase";
 
 import Appbar from "../components/Appbar";
 import MiniDrawer from "../components/MiniDrawer";
+import { collection, getDocs, addDoc } from "firebase/firestore";
+import { UserContext } from "../context/UserContext";
 
 const DrawerHeader = styled("div")(({ theme }) => ({
   display: "flex",
@@ -15,6 +18,24 @@ const DrawerHeader = styled("div")(({ theme }) => ({
 
 const Chat = () => {
   const [isDrawerOpen, setIsDrawerOpen] = React.useState(false);
+  const [message, setMessage] = React.useState("");
+
+  const { user } = React.useContext(UserContext);
+  const sendMessage = async () => {
+    const messageToSend = message;
+    setMessage("");
+    try {
+      const docRef = await addDoc(collection(db, "messages"), {
+        userId: user.uid,
+        message: messageToSend,
+        createdAt: new Date(),
+      });
+
+      console.log("Document written with ID: ", docRef.id);
+    } catch (e) {
+      console.error("Error adding document: ", e);
+    }
+  };
 
   return (
     <Box sx={{ display: "flex" }}>
@@ -50,8 +71,12 @@ const Chat = () => {
             fullWidth={true}
             multiline
             sx={{ marginRight: "2rem" }}
+            onChange={(e) => setMessage(e.target.value)}
+            value={message}
           />
-          <Button variant="contained">Send</Button>
+          <Button variant="contained" onClick={() => sendMessage()}>
+            Send
+          </Button>
         </Box>
       </Box>
     </Box>
