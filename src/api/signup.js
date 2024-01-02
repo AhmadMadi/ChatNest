@@ -9,7 +9,7 @@ export const signup = async ({ displayName, email, password }) => {
     displayName,
   });
 
-  await addDoc(collection(db, "messages"), {
+  await addDoc(collection(db, "users"), {
     userId: user.uid,
     displayName: user.displayName,
     createdAt: new Date().getTime(),
