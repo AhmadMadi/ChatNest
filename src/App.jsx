@@ -12,11 +12,11 @@ import CssBaseline from "@mui/material/CssBaseline";
 import Register from "./components/Register";
 import Chat from "./pages/Chat";
 import { UserContext } from "./context/UserContext";
+import { auth } from "./config/firebase";
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const { user } = useContext(UserContext);
-
+  const { setUser } = useContext(UserContext);
   const darkTheme = createTheme({
     palette: {
       mode: "dark",
@@ -24,16 +24,17 @@ function App() {
   });
 
   useEffect(() => {
-    console.log("yoooo");
-    setIsLoggedIn(!!user);
-  }, [user]);
+    auth.onAuthStateChanged((user) => {
+      setIsLoggedIn(!!user)
+      setUser(user);
+    });
+  }, [setUser]);
 
   return (
     <ThemeProvider theme={darkTheme}>
       <CssBaseline />
       <Container maxWidth="lg">
-        {/* {isLoggedIn ? <Chat /> : <Register />} */}
-        <Chat />
+        {isLoggedIn ? <Chat /> : <Register />}
       </Container>
     </ThemeProvider>
   );
