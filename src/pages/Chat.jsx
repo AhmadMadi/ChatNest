@@ -5,7 +5,15 @@ import { db } from "../config/firebase";
 
 import Appbar from "../components/Appbar";
 import MiniDrawer from "../components/MiniDrawer";
-import { collection, getDocs, addDoc } from "firebase/firestore";
+import {
+  collection,
+  getDocs,
+  addDoc,
+  onSnapshot,
+  query,
+  orderBy,
+  limit,
+} from "firebase/firestore";
 import { UserContext } from "../context/UserContext";
 
 const DrawerHeader = styled("div")(({ theme }) => ({
@@ -19,16 +27,45 @@ const DrawerHeader = styled("div")(({ theme }) => ({
 const Chat = () => {
   const [isDrawerOpen, setIsDrawerOpen] = React.useState(false);
   const [message, setMessage] = React.useState("");
+  const [fetchedMessages, setFetchedMessages] = React.useState([]);
 
   const { user } = React.useContext(UserContext);
+
+  React.useEffect(() => {
+    const getData = async () => {
+      const querySnapshot = await getDocs(
+        query(
+          collection(db, "messages"),
+          orderBy("createdAt", "asc"),
+          limit(50)
+        )
+      );
+
+      setFetchedMessages(querySnapshot.docs.map((doc) => doc.data()));
+    };
+
+    getData();
+
+    const unsubscribe = onSnapshot(
+      query(collection(db, "messages"), orderBy("createdAt", "asc"), limit(50)),
+      (snapshot) => {
+        const updatedMessages = snapshot.docs.map((doc) => doc.data());
+        setFetchedMessages(updatedMessages);
+      }
+    );
+
+    return () => unsubscribe();
+  }, []);
+
   const sendMessage = async () => {
+    if (message === "") return;
     const messageToSend = message;
     setMessage("");
     try {
       const docRef = await addDoc(collection(db, "messages"), {
         userId: user.uid,
         message: messageToSend,
-        createdAt: new Date(),
+        createdAt: new Date().getTime(),
       });
 
       console.log("Document written with ID: ", docRef.id);
@@ -59,22 +96,27 @@ const Chat = () => {
       >
         <Box sx={{ height: "75%" }}>
           <DrawerHeader />
-          <Box sx={{ height: "100%", backgroundColor: "green" }}>
-            Welcome to ChatNest!!!
+          <Box sx={{ height: "100%" }}>
+            {fetchedMessages.map((message, index) => (
+              <li key={index}>{message.message}</li>
+            ))}
           </Box>
         </Box>
-        <Box sx={{ display: "flex", backgroundColor: "red" }}>
+        <Box sx={{ display: "flex", marginTop: "1rem" }}>
           <TextField
             id="messageBox"
             variant="standard"
             placeholder="send a message..."
             fullWidth={true}
-            multiline
             sx={{ marginRight: "2rem" }}
             onChange={(e) => setMessage(e.target.value)}
             value={message}
           />
-          <Button variant="contained" onClick={() => sendMessage()}>
+          <Button
+            variant="contained"
+            onClick={() => sendMessage()}
+            disabled={!message.length}
+          >
             Send
           </Button>
         </Box>
