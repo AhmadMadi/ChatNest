@@ -5,9 +5,11 @@ import {
   Toolbar,
   IconButton,
   Typography,
+  Button,
 } from "@mui/material";
 import { styled } from "@mui/material/styles";
 import MenuIcon from "@mui/icons-material/Menu";
+import { signout } from "../api/signout";
 
 const drawerWidth = 240;
 
@@ -32,6 +34,10 @@ const AppBar = styled(MuiAppBar, {
 const Appbar = (props) => {
   const open = props.isDrawerOpen;
 
+  const signoutUser = () => {
+    signout();
+  };
+
   return (
     <AppBar position="fixed" open={open}>
       <Toolbar>
@@ -50,6 +56,7 @@ const Appbar = (props) => {
         <Typography variant="h6" noWrap component="div">
           ChatNest
         </Typography>
+        <Button onClick={() => signoutUser()}>Sign out</Button>
       </Toolbar>
     </AppBar>
   );
