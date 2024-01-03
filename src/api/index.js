@@ -1,2 +1,3 @@
-export { signin } from "./signin";
-export { signup } from "./signup";
+export { signIn } from "./signin";
+export { signUp } from "./signup";
+export { signOut } from "./signout";

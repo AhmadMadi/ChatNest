@@ -1,6 +1,6 @@
 import { auth } from "../config/firebase";
-import { signOut } from "firebase/auth";
+import { signOut as signout } from "firebase/auth";
 
-export const signout = async () => {
-    await signOut(auth);
-}
+export const signOut = async () => {
+  await signout(auth);
+};
