@@ -5,7 +5,7 @@ import "@fontsource/roboto/500.css";
 import "@fontsource/roboto/700.css";
 
 import { useContext, useEffect, useState } from "react";
-import { Container, CircularProgress, Box } from "@mui/material";
+import { CircularProgress, Box } from "@mui/material";
 import { ThemeProvider, createTheme } from "@mui/material/styles";
 import CssBaseline from "@mui/material/CssBaseline";
 
@@ -35,7 +35,7 @@ function App() {
   return (
     <ThemeProvider theme={darkTheme}>
       <CssBaseline />
-      <Container maxWidth="lg">
+      <Box>
         {isLoading ? (
           <Box
             sx={{
@@ -52,7 +52,7 @@ function App() {
         ) : (
           <Register />
         )}
-      </Container>
+      </Box>
     </ThemeProvider>
   );
 }
