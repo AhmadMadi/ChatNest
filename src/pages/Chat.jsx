@@ -1,5 +1,13 @@
 import * as React from "react";
-import { Box, TextField, Button, CircularProgress } from "@mui/material";
+import {
+  AppBar,
+  Container,
+  Box,
+  TextField,
+  Button,
+  CircularProgress,
+  Typography,
+} from "@mui/material";
 import { db } from "../config/firebase";
 
 import {
@@ -12,13 +20,19 @@ import {
   limit,
 } from "firebase/firestore";
 import { UserContext } from "../context/UserContext";
+import { signOut } from "../api";
 
 const Chat = () => {
   const [isLoading, setIsLoading] = React.useState(true);
   const [message, setMessage] = React.useState("");
   const [fetchedMessages, setFetchedMessages] = React.useState([]);
 
-  const { user } = React.useContext(UserContext);
+  const { user, setUser } = React.useContext(UserContext);
+
+  const handleSignOut = async () => {
+    await signOut();
+    setUser(null);
+  };
 
   React.useEffect(() => {
     const getData = async () => {
