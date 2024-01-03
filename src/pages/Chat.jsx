@@ -1,6 +1,6 @@
 import * as React from "react";
 import { styled } from "@mui/material/styles";
-import { Box, TextField, Button } from "@mui/material";
+import { Box, TextField, Button, CircularProgress } from "@mui/material";
 import { db } from "../config/firebase";
 
 import Appbar from "../components/Appbar";
@@ -25,6 +25,7 @@ const DrawerHeader = styled("div")(({ theme }) => ({
 }));
 
 const Chat = () => {
+  const [isLoading, setIsLoading] = React.useState(true);
   const [isDrawerOpen, setIsDrawerOpen] = React.useState(false);
   const [message, setMessage] = React.useState("");
   const [fetchedMessages, setFetchedMessages] = React.useState([]);
@@ -42,6 +43,7 @@ const Chat = () => {
       );
 
       setFetchedMessages(querySnapshot.docs.map((doc) => doc.data()));
+      setIsLoading(false);
     };
 
     getData();
@@ -95,11 +97,44 @@ const Chat = () => {
         }}
       >
         <Box sx={{ height: "75%" }}>
-          <DrawerHeader />
-          <Box sx={{ height: "100%" }}>
-            {fetchedMessages.map((message, index) => (
-              <li key={index}>{message.message}</li>
-            ))}
+          {isLoading ? (
+            <Box
+              sx={{
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center",
+                height: "100vh",
+              }}
+            >
+              <CircularProgress />
+            </Box>
+          ) : (
+            fetchedMessages.map((message, index) => (
+              <Box
+                key={index}
+                sx={{
+                  display: "flex",
+                  justifyContent:
+                    message.userId === user.uid ? "flex-end" : "flex-start",
+                }}
+              >
+                {message.userId !== user.uid ? message.displayName : ""}
+                <Box
+                  sx={{
+                    bgcolor:
+                      message.userId === user.uid
+                        ? "primary.main"
+                        : "secondary.main",
+                    color: "white",
+                    py: 1,
+                    px: 2,
+                    my: "0.2rem",
+                    borderRadius: "1rem",
+                    maxWidth: "80%",
+                  }}
+                >
+                  {message.message}
+                </Box>
           </Box>
         </Box>
         <Box sx={{ display: "flex", marginTop: "1rem" }}>
