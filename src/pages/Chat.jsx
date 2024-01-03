@@ -1,10 +1,7 @@
 import * as React from "react";
-import { styled } from "@mui/material/styles";
 import { Box, TextField, Button, CircularProgress } from "@mui/material";
 import { db } from "../config/firebase";
 
-import Appbar from "../components/Appbar";
-import MiniDrawer from "../components/MiniDrawer";
 import {
   collection,
   getDocs,
@@ -16,17 +13,8 @@ import {
 } from "firebase/firestore";
 import { UserContext } from "../context/UserContext";
 
-const DrawerHeader = styled("div")(({ theme }) => ({
-  display: "flex",
-  alignItems: "center",
-  justifyContent: "flex-end",
-  padding: theme.spacing(0, 1),
-  ...theme.mixins.toolbar,
-}));
-
 const Chat = () => {
   const [isLoading, setIsLoading] = React.useState(true);
-  const [isDrawerOpen, setIsDrawerOpen] = React.useState(false);
   const [message, setMessage] = React.useState("");
   const [fetchedMessages, setFetchedMessages] = React.useState([]);
 
@@ -73,14 +61,6 @@ const Chat = () => {
 
   return (
     <Box sx={{ display: "flex", height: "100vh" }}>
-      {/* <Appbar
-        handleDrawerOpen={() => setIsDrawerOpen(true)}
-        isDrawerOpen={isDrawerOpen}
-      />
-      <MiniDrawer
-        isDrawerOpen={isDrawerOpen}
-        handleDrawerClose={() => setIsDrawerOpen(false)}
-      /> */}
       <Box
         component="main"
         sx={{
