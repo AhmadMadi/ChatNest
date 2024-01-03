@@ -92,78 +92,85 @@ const Chat = () => {
         </Container>
       </AppBar>
       <Container sx={{ display: "flex", height: "92vh" }} maxWidth="md">
-      <Box
-        component="main"
-        sx={{
-          flexGrow: 1,
-          py: 3,
-          display: "flex",
-          flexDirection: "column",
-          justifyContent: "space-between",
-        }}
-      >
-        <Box sx={{ height: "75%" }}>
-          {isLoading ? (
-            <Box
-              sx={{
-                display: "flex",
-                justifyContent: "center",
-                alignItems: "center",
-                height: "100vh",
-              }}
-            >
-              <CircularProgress />
-            </Box>
-          ) : (
-            fetchedMessages.map((message, index) => (
+        <Box
+          component="main"
+          sx={{
+            flexGrow: 1,
+            py: 3,
+            display: "flex",
+            flexDirection: "column",
+            justifyContent: "space-between",
+          }}
+        >
+          <Box sx={{ height: "78vh", overflow: "auto" }}>
+            {isLoading ? (
               <Box
-                key={index}
                 sx={{
                   display: "flex",
-                  justifyContent:
-                    message.userId === user.uid ? "flex-end" : "flex-start",
+                  justifyContent: "center",
+                  alignItems: "center",
+                  height: "100vh",
                 }}
               >
-                {message.userId !== user.uid ? message.displayName : ""}
+                <CircularProgress />
+              </Box>
+            ) : (
+              fetchedMessages.map((message, index) => (
                 <Box
+                  key={index}
                   sx={{
-                    bgcolor:
-                      message.userId === user.uid
-                        ? "primary.main"
-                        : "secondary.main",
-                    color: "white",
-                    py: 1,
-                    px: 2,
-                    my: "0.2rem",
-                    borderRadius: "1rem",
-                    maxWidth: "80%",
+                    display: "flex",
+                    justifyContent:
+                      message.userId === user.uid ? "flex-end" : "flex-start",
+                    alignItems: "center",
                   }}
                 >
-                  {message.message}
+                  {message.userId !== user.uid ? (
+                    <Typography sx={{ fontWeight: "bold", mr: "1rem" }}>
+                      {message.displayName}:
+                    </Typography>
+                  ) : (
+                    ""
+                  )}
+                  <Box
+                    sx={{
+                      bgcolor:
+                        message.userId === user.uid
+                          ? "primary.main"
+                          : "secondary.main",
+                      color: "white",
+                      py: 1,
+                      px: 2,
+                      my: "0.2rem",
+                      borderRadius: "1rem",
+                      maxWidth: "80%",
+                    }}
+                  >
+                    {message.message}
+                  </Box>
                 </Box>
-              </Box>
-            ))
-          )}
+              ))
+            )}
+          </Box>
+          <Box sx={{ display: "flex" }}>
+            <TextField
+              id="messageBox"
+              variant="standard"
+              placeholder="send a message..."
+              fullWidth={true}
+              sx={{ marginRight: "2rem" }}
+              onChange={(e) => setMessage(e.target.value)}
+              value={message}
+            />
+            <Button
+              variant="contained"
+              onClick={() => sendMessage()}
+              disabled={!message.length}
+            >
+              Send
+            </Button>
+          </Box>
         </Box>
-        <Box sx={{ display: "flex" }}>
-          <TextField
-            id="messageBox"
-            variant="standard"
-            placeholder="send a message..."
-            fullWidth={true}
-            sx={{ marginRight: "2rem" }}
-            onChange={(e) => setMessage(e.target.value)}
-            value={message}
-          />
-          <Button
-            variant="contained"
-            onClick={() => sendMessage()}
-            disabled={!message.length}
-          >
-            Send
-          </Button>
-        </Box>
-      </Box>
       </Container>
     </>
   );
