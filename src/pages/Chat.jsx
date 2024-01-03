@@ -60,7 +60,24 @@ const Chat = () => {
   };
 
   return (
-    <Box sx={{ display: "flex", height: "100vh" }}>
+    <>
+      <AppBar position="static">
+        <Container
+          maxWidth="md"
+          sx={{
+            display: "flex",
+            flexDirection: "row",
+            justifyContent: "space-between",
+            alignItems: "center",
+            padding: "0 0.5rem",
+            height: "8vh",
+          }}
+        >
+          <span>ChatNest</span>
+          <Button onClick={handleSignOut}>Sign out</Button>
+        </Container>
+      </AppBar>
+      <Container sx={{ display: "flex", height: "92vh" }} maxWidth="md">
       <Box
         component="main"
         sx={{
@@ -133,7 +150,8 @@ const Chat = () => {
           </Button>
         </Box>
       </Box>
-    </Box>
+      </Container>
+    </>
   );
 };
 
