@@ -2,7 +2,7 @@ import { useState, useContext } from "react";
 import { Box, Stack, Typography, TextField } from "@mui/material";
 import { LoadingButton } from "@mui/lab";
 
-import { signup, signin } from "../api";
+import { signUp, signIn } from "../api";
 import Alert from "../components/Alert";
 import { errorCodeMapper } from "../config/firebase";
 import UserContext from "../context/UserContext";
@@ -38,10 +38,10 @@ const Register = () => {
 
       switch (isSignUp) {
         case true:
-          user = await signup({ displayName, email, password });
+          user = await signUp({ displayName, email, password });
           break;
         case false:
-          user = await signin({ email, password });
+          user = await signIn({ email, password });
           break;
         default:
           break;
