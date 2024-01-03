@@ -63,34 +63,29 @@ const Chat = () => {
     if (message === "") return;
     const messageToSend = message;
     setMessage("");
-    try {
-      const docRef = await addDoc(collection(db, "messages"), {
-        userId: user.uid,
-        message: messageToSend,
-        createdAt: new Date().getTime(),
-      });
-
-      console.log("Document written with ID: ", docRef.id);
-    } catch (e) {
-      console.error("Error adding document: ", e);
-    }
+    await addDoc(collection(db, "messages"), {
+      userId: user.uid,
+      message: messageToSend,
+      displayName: user.displayName,
+      createdAt: new Date().getTime(),
+    });
   };
 
   return (
-    <Box sx={{ display: "flex" }}>
-      <Appbar
+    <Box sx={{ display: "flex", height: "100vh" }}>
+      {/* <Appbar
         handleDrawerOpen={() => setIsDrawerOpen(true)}
         isDrawerOpen={isDrawerOpen}
       />
       <MiniDrawer
         isDrawerOpen={isDrawerOpen}
         handleDrawerClose={() => setIsDrawerOpen(false)}
-      />
+      /> */}
       <Box
         component="main"
         sx={{
           flexGrow: 1,
-          p: 3,
+          py: 3,
           display: "flex",
           flexDirection: "column",
           justifyContent: "space-between",
@@ -135,9 +130,11 @@ const Chat = () => {
                 >
                   {message.message}
                 </Box>
-          </Box>
+              </Box>
+            ))
+          )}
         </Box>
-        <Box sx={{ display: "flex", marginTop: "1rem" }}>
+        <Box sx={{ display: "flex" }}>
           <TextField
             id="messageBox"
             variant="standard"
