@@ -26,6 +26,7 @@ const Chat = () => {
   const [isLoading, setIsLoading] = React.useState(true);
   const [message, setMessage] = React.useState("");
   const [fetchedMessages, setFetchedMessages] = React.useState([]);
+  const scrollToDiv = React.useRef();
 
   const { user, setUser } = React.useContext(UserContext);
 
@@ -71,6 +72,8 @@ const Chat = () => {
       displayName: user.displayName,
       createdAt: new Date().getTime(),
     });
+
+    scrollToDiv.current.scrollIntoView({ behavior: "smooth" });
   };
 
   return (
@@ -132,6 +135,7 @@ const Chat = () => {
                   ) : (
                     ""
                   )}
+                  <div ref={scrollToDiv}></div>
                   <Box
                     sx={{
                       bgcolor:
