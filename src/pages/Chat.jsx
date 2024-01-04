@@ -78,28 +78,29 @@ const Chat = () => {
 
   return (
     <>
-      <AppBar position="static">
-        <Container
-          maxWidth="md"
+      <Container maxWidth="md">
+        <AppBar
+          position="static"
           sx={{
             display: "flex",
             flexDirection: "row",
             justifyContent: "space-between",
             alignItems: "center",
-            padding: "0 0.5rem",
+            padding: "0 1rem",
             height: "8vh",
           }}
         >
           <span>ChatNest</span>
           <Button onClick={handleSignOut}>Sign out</Button>
-        </Container>
-      </AppBar>
+        </AppBar>
+      </Container>
       <Container sx={{ display: "flex", height: "92vh" }} maxWidth="md">
         <Box
           component="main"
           sx={{
             flexGrow: 1,
             py: 3,
+            px: 2,
             display: "flex",
             flexDirection: "column",
             justifyContent: "space-between",
