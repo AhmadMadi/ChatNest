@@ -62,6 +62,10 @@ const Chat = () => {
     return () => unsubscribe();
   }, []);
 
+  React.useEffect(() => {
+    scrollToDiv.current.scrollIntoView({ behavior: "smooth" });
+  }, [fetchedMessages]);
+
   const sendMessage = async () => {
     if (message === "") return;
     const messageToSend = message;
