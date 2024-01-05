@@ -63,7 +63,7 @@ const Chat = () => {
   }, []);
 
   React.useEffect(() => {
-    scrollToDiv.current.scrollIntoView({ behavior: "smooth" });
+    scrollToDiv.current?.scrollIntoView();
   }, [fetchedMessages]);
 
   const sendMessage = async () => {
@@ -76,8 +76,6 @@ const Chat = () => {
       displayName: user.displayName,
       createdAt: new Date().getTime(),
     });
-
-    scrollToDiv.current.scrollIntoView({ behavior: "smooth" });
   };
 
   return (
