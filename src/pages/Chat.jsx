@@ -108,7 +108,7 @@ const Chat = () => {
             height: "8vh",
           }}
         >
-          <span>ChatNest</span>
+          <img src="src/assets/logo.svg" alt="chatnest-logo" width={50} />
           <Button onClick={handleSignOut}>Sign out</Button>
         </AppBar>
       </Container>

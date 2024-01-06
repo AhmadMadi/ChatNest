@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<svg viewBox="-1.439 8.537 67.166 47.29" xmlns="http://www.w3.org/2000/svg">
+  <g data-name="27-Bird" transform="matrix(1, 0, 0, 1, 8.881784197001252e-16, 0)">
+    <rect x="20" y="32" width="2" height="2" style="fill-rule: nonzero; paint-order: fill; fill: rgb(255, 255, 255);"/>
+    <rect x="24" y="32" width="22" height="2" style="fill-rule: nonzero; paint-order: fill; fill: rgb(255, 255, 255);"/>
+    <path d="M41.705,54H22.3a15.517,15.517,0,0,1-8.444-2.493L6.333,46.643A13.819,13.819,0,0,1,0,35a3,3,0,0,1,3-3h.352a2.717,2.717,0,0,1-.015-2.645A2.557,2.557,0,0,1,7.763,29.2L9.548,32H18v2H9a1,1,0,0,1-.843-.462L6.078,30.279A.578.578,0,0,0,5.6,30a.568.568,0,0,0-.5.316.714.714,0,0,0,.022.733l.9,1.413A1,1,0,0,1,5.172,34H3a1,1,0,0,0-1,1,11.82,11.82,0,0,0,5.42,9.963l7.517,4.864A13.516,13.516,0,0,0,22.3,52h19.41a13.516,13.516,0,0,0,7.358-2.173l7.517-4.864A11.82,11.82,0,0,0,62,35a1,1,0,0,0-1-1H59a1,1,0,0,1-.877-1.48l1.617-2.956a1.156,1.156,0,0,1,.073-.114.981.981,0,0,0,.078-1.026A.7.7,0,0,0,59.266,28a.689.689,0,0,0-.548.3L54.8,33.6A1,1,0,0,1,54,34H48V32h5.5l3.614-4.892A2.666,2.666,0,0,1,59.266,26a2.709,2.709,0,0,1,2.411,1.523,2.967,2.967,0,0,1-.212,3.055L60.687,32H61a3,3,0,0,1,3,3,13.819,13.819,0,0,1-6.333,11.643l-7.518,4.864A15.517,15.517,0,0,1,41.705,54Z" style="fill-rule: nonzero; paint-order: fill; fill: rgb(255, 255, 255);"/>
+    <rect x="52" y="36" width="2" height="2" style="fill-rule: nonzero; paint-order: fill; fill: rgb(255, 255, 255);"/>
+    <rect x="40" y="36" width="10" height="2" style="fill-rule: nonzero; paint-order: fill; fill: rgb(255, 255, 255);"/>
+    <rect x="31" y="47" width="2" height="2" style="fill-rule: nonzero; paint-order: fill; fill: rgb(255, 255, 255);"/>
+    <rect x="19" y="47" width="10" height="2" style="fill-rule: nonzero; paint-order: fill; fill: rgb(255, 255, 255);"/>
+    <rect x="36" y="36" width="2" height="2" style="fill-rule: nonzero; paint-order: fill; fill: rgb(255, 255, 255);"/>
+    <path d="M35.441,33.9A10.2,10.2,0,0,1,31,25c0-6.937,5.242-15,12-15s12,8.063,12,15a10.215,10.215,0,0,1-4.326,8.821l-1.14-1.642A8.3,8.3,0,0,0,53,25c0-5.889-4.46-13-10-13S33,19.111,33,25a8.282,8.282,0,0,0,3.559,7.242Z" style="fill-rule: nonzero; paint-order: fill; fill: rgb(255, 255, 255);"/>
+    <path d="M54,29H52.953a3.715,3.715,0,0,1-1.453-.309A4.229,4.229,0,0,1,49,24.738V22h2v2.738a2.269,2.269,0,0,0,1.279,2.112,1.751,1.751,0,0,0,.674.15H54Z" style="fill-rule: nonzero; paint-order: fill; fill: rgb(255, 255, 255);"/>
+    <path d="M33.047,29H32V27h1.047a1.76,1.76,0,0,0,.675-.15A2.27,2.27,0,0,0,35,24.738V22h2v2.738a4.23,4.23,0,0,1-2.5,3.953A3.732,3.732,0,0,1,33.047,29Z" style="fill-rule: nonzero; paint-order: fill; fill: rgb(255, 255, 255);"/>
+    <path d="M43,26a1,1,0,0,1-.832-.445l-2-3A1,1,0,0,1,41,21h4a1,1,0,0,1,.832,1.555l-2,3A1,1,0,0,1,43,26Zm-.131-3,.131.2.131-.2Z" style="fill-rule: nonzero; paint-order: fill; fill: rgb(255, 255, 255);"/>
+    <rect x="46" y="18" width="2" height="2" style="fill-rule: nonzero; paint-order: fill; fill: rgb(255, 255, 255);"/>
+    <rect x="38" y="18" width="2" height="2" style="fill-rule: nonzero; paint-order: fill; fill: rgb(255, 255, 255);"/>
+    <path d="M28.559,33.9l-1.118-1.658A8.282,8.282,0,0,0,31,25c0-5.889-4.46-13-10-13S11,19.111,11,25a8.3,8.3,0,0,0,3.466,7.179l-1.141,1.642A10.22,10.22,0,0,1,9,25c0-6.937,5.242-15,12-15s12,8.063,12,15A10.2,10.2,0,0,1,28.559,33.9Z" style="fill-rule: nonzero; paint-order: fill; fill: rgb(255, 255, 255);"/>
+    <path d="M32,29H30.953a3.715,3.715,0,0,1-1.453-.309A4.229,4.229,0,0,1,27,24.738V22h2v2.738a2.269,2.269,0,0,0,1.279,2.112,1.751,1.751,0,0,0,.674.15H32Z" style="fill-rule: nonzero; paint-order: fill; fill: rgb(255, 255, 255);"/>
+    <path d="M11.047,29H10V27h1.047a1.76,1.76,0,0,0,.675-.15A2.27,2.27,0,0,0,13,24.738V22h2v2.738a4.23,4.23,0,0,1-2.5,3.953A3.732,3.732,0,0,1,11.047,29Z" style="fill-rule: nonzero; paint-order: fill; fill: rgb(255, 255, 255);"/>
+    <path d="M21,26a1,1,0,0,1-.832-.445l-2-3A1,1,0,0,1,19,21h4a1,1,0,0,1,.832,1.555l-2,3A1,1,0,0,1,21,26Zm-.131-3,.131.2.131-.2Z" style="fill-rule: nonzero; paint-order: fill; fill: rgb(255, 255, 255);"/>
+    <rect x="24" y="18" width="2" height="2" style="fill-rule: nonzero; paint-order: fill; fill: rgb(255, 255, 255);"/>
+    <rect x="16" y="18" width="2" height="2" style="fill-rule: nonzero; paint-order: fill; fill: rgb(255, 255, 255);"/>
+    <rect x="8" y="37" width="2" height="2" style="fill-rule: nonzero; paint-order: fill; fill: rgb(255, 255, 255);"/>
+    <rect x="12" y="37" width="8" height="2" style="fill-rule: nonzero; paint-order: fill; fill: rgb(255, 255, 255);"/>
+  </g>
+</svg>
