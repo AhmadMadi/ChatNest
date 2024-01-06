@@ -149,7 +149,7 @@ const Chat = () => {
                     alignItems: "center",
                   }}
                 >
-                  {message.userId !== user.uid ? (
+                  {message.userId !== user.uid && (
                     <Typography
                       sx={{
                         fontWeight: "bold",
@@ -159,8 +159,6 @@ const Chat = () => {
                     >
                       {message.displayName}:
                     </Typography>
-                  ) : (
-                    ""
                   )}
                   <Box
                     sx={{
