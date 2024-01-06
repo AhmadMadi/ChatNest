@@ -80,7 +80,8 @@ const Chat = () => {
     setUserColors({ colors });
   }, [fetchedMessages]);
 
-  const sendMessage = async () => {
+  const sendMessage = async (e) => {
+    e.preventDefault();
     if (message === "") return;
     const messageToSend = message;
     setMessage("");
@@ -180,24 +181,26 @@ const Chat = () => {
               ))
             )}
           </Box>
-          <Box sx={{ display: "flex" }}>
-            <TextField
-              id="messageBox"
-              variant="standard"
-              placeholder="send a message..."
-              fullWidth={true}
-              sx={{ marginRight: "2rem" }}
-              onChange={(e) => setMessage(e.target.value)}
-              value={message}
-            />
-            <Button
-              variant="contained"
-              onClick={() => sendMessage()}
-              disabled={!message.length}
-            >
-              Send
-            </Button>
-          </Box>
+          <form onSubmit={(e) => sendMessage(e)}>
+            <Box sx={{ display: "flex" }}>
+              <TextField
+                id="messageBox"
+                variant="standard"
+                placeholder="send a message..."
+                fullWidth={true}
+                sx={{ marginRight: "2rem" }}
+                onChange={(e) => setMessage(e.target.value)}
+                value={message}
+              />
+              <Button
+                variant="contained"
+                disabled={!message.length}
+                type="submit"
+              >
+                Send
+              </Button>
+            </Box>
+          </form>
         </Box>
       </Container>
     </>
