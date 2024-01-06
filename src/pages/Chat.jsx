@@ -69,16 +69,19 @@ const Chat = () => {
 
   React.useEffect(() => {
     const colors = {};
-
     fetchedMessages.forEach((message) => {
-      if (colors[message.userId]) return;
+      if (userColors[message.userId]) return;
+
       colors[message.userId] = `#${Math.floor(Math.random() * 16777215)
         .toString(16)
         .padStart(6, "0")}`;
     });
 
-    setUserColors({ colors });
-  }, [fetchedMessages]);
+    setUserColors({
+      ...userColors,
+      ...colors,
+    });
+  }, [fetchedMessages, userColors]);
 
   const sendMessage = async (e) => {
     e.preventDefault();
@@ -158,7 +161,7 @@ const Chat = () => {
                       sx={{
                         fontWeight: "bold",
                         mr: "0.5rem",
-                        color: userColors.colors[message.userId],
+                        color: userColors[message.userId],
                       }}
                     >
                       {message.displayName}:
