@@ -92,8 +92,6 @@ const Chat = () => {
     });
   };
 
-  console.log(userColors);
-
   return (
     <>
       <Container maxWidth="md">
@@ -108,7 +106,10 @@ const Chat = () => {
             height: "8vh",
           }}
         >
-          <img src="src/assets/logo.svg" alt="chatnest-logo" width={50} />
+          <Box sx={{ display: "flex", alignItems: "center", gap: 1 }}>
+            <img src="src/assets/logo.svg" alt="chatnest-logo" width={50} />
+            <Typography>ChatNest</Typography>
+          </Box>
           <Button onClick={handleSignOut}>Sign out</Button>
         </AppBar>
       </Container>
@@ -122,6 +123,7 @@ const Chat = () => {
             display: "flex",
             flexDirection: "column",
             justifyContent: "space-between",
+            backgroundColor: "#000",
           }}
         >
           <Box sx={{ height: "78vh", overflow: "auto" }}>
