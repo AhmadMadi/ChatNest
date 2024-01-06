@@ -107,7 +107,7 @@ const Chat = () => {
           }}
         >
           <Box sx={{ display: "flex", alignItems: "center", gap: 1 }}>
-            <img src="src/assets/logo.svg" alt="chatnest-logo" width={50} />
+            <img src="/assets/logo.svg" alt="chatnest-logo" width={50} />
             <Typography>ChatNest</Typography>
           </Box>
           <Button onClick={handleSignOut}>Sign out</Button>
