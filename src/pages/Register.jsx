@@ -1,6 +1,7 @@
 import { useState, useContext } from "react";
 import { Box, Stack, Typography, TextField } from "@mui/material";
 import { LoadingButton } from "@mui/lab";
+import styled from "@emotion/styled";
 
 import { signUp, signIn } from "../api";
 import Alert from "../components/Alert";
@@ -69,7 +70,7 @@ const Register = () => {
       }}
     >
       <form onSubmit={handleSubmit}>
-        <Stack
+        <StyledStack
           spacing={2}
           sx={{
             padding: "3rem",
@@ -125,7 +126,7 @@ const Register = () => {
               Click here.
             </Typography>
           </Box>
-        </Stack>
+        </StyledStack>
       </form>
       <Alert
         isOpen={alertData.isOpen}
@@ -138,3 +139,14 @@ const Register = () => {
 };
 
 export default Register;
+
+const StyledStack = styled(Stack)({
+  "@media (max-width: 600px)": {
+    width: "20rem",
+  },
+  padding: "3rem",
+  borderradius: "0.3rem",
+  backgroundcolor: "#000",
+  border: "1px solid #fff",
+  width: "25rem",
+});
