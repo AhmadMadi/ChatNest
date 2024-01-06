@@ -94,7 +94,7 @@ const Chat = () => {
 
   return (
     <>
-      <Container maxWidth="md">
+      <Container maxWidth="md" sx={{ padding: 0 }}>
         <AppBar
           position="static"
           sx={{
@@ -113,7 +113,10 @@ const Chat = () => {
           <Button onClick={handleSignOut}>Sign out</Button>
         </AppBar>
       </Container>
-      <Container sx={{ display: "flex", height: "92vh" }} maxWidth="md">
+      <Container
+        sx={{ display: "flex", height: "92vh", padding: 0 }}
+        maxWidth="md"
+      >
         <Box
           component="main"
           sx={{
