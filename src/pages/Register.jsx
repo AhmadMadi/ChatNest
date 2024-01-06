@@ -1,5 +1,5 @@
 import { useState, useContext } from "react";
-import { Box, Stack, Typography, TextField } from "@mui/material";
+import { Box, Stack, Typography, TextField, Link } from "@mui/material";
 import { LoadingButton } from "@mui/lab";
 
 import { signUp, signIn } from "../api";
@@ -74,9 +74,21 @@ const Register = () => {
           sx={{
             padding: "3rem",
             borderRadius: "0.3rem",
+            backgroundColor: "#000",
+            border: "1px solid #fff",
+            width: "25rem",
           }}
         >
-          <Typography variant="h6" sx={{ alignSelf: "center" }}>
+          <Box
+            sx={{
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+            }}
+          >
+            <img src="/assets/logo.svg" alt="whatsapp logo" width="100" />
+          </Box>
+          <Typography variant="h6" sx={{ alignSelf: "center", pt: "1.5rem" }}>
             {isSignUp ? "Create account" : "Welcome back!"}
           </Typography>
           {isSignUp && (
@@ -98,15 +110,21 @@ const Register = () => {
           <LoadingButton loading={isLoading} variant="outlined" type="submit">
             {isSignUp ? "Register" : "Login"}
           </LoadingButton>
-          <Typography
-            variant="body2"
-            sx={{ cursor: "pointer" }}
-            onClick={() => setIsSignUp(!isSignUp)}
-          >
-            {isSignUp
-              ? "Already have an account? Click here."
-              : "No account? Click here."}
-          </Typography>
+          <Box sx={{ display: "flex", gap: 1 }}>
+            <Typography>
+              {isSignUp ? "Already have an account?" : "No account?"}
+            </Typography>
+            <Typography
+              onClick={() => setIsSignUp(!isSignUp)}
+              sx={{
+                cursor: "pointer",
+                color: "#0000FF",
+                textDecoration: "underline",
+              }}
+            >
+              Click here.
+            </Typography>
+          </Box>
         </Stack>
       </form>
       <Alert
