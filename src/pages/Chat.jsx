@@ -26,6 +26,7 @@ const Chat = () => {
   const [isLoading, setIsLoading] = React.useState(true);
   const [message, setMessage] = React.useState("");
   const [fetchedMessages, setFetchedMessages] = React.useState([]);
+  const [userColors, setUserColors] = React.useState({});
   const scrollToDiv = React.useRef();
 
   const { user, setUser } = React.useContext(UserContext);
@@ -66,6 +67,19 @@ const Chat = () => {
     scrollToDiv.current?.scrollIntoView();
   }, [fetchedMessages]);
 
+  React.useEffect(() => {
+    const colors = {};
+
+    fetchedMessages.forEach((message) => {
+      if (colors[message.userId]) return;
+      colors[message.userId] = `#${Math.floor(Math.random() * 16777215)
+        .toString(16)
+        .padStart(6, "0")}`;
+    });
+
+    setUserColors({ colors });
+  }, [fetchedMessages]);
+
   const sendMessage = async () => {
     if (message === "") return;
     const messageToSend = message;
@@ -77,6 +91,8 @@ const Chat = () => {
       createdAt: new Date().getTime(),
     });
   };
+
+  console.log(userColors);
 
   return (
     <>
@@ -132,22 +148,23 @@ const Chat = () => {
                   }}
                 >
                   {message.userId !== user.uid ? (
-                    <Typography sx={{ fontWeight: "bold", mr: "1rem" }}>
+                    <Typography
+                      sx={{
+                        fontWeight: "bold",
+                        mr: "0.5rem",
+                        color: userColors.colors[message.userId],
+                      }}
+                    >
                       {message.displayName}:
                     </Typography>
                   ) : (
                     ""
                   )}
-                  <div ref={scrollToDiv}></div>
                   <Box
                     sx={{
-                      bgcolor:
-                        message.userId === user.uid
-                          ? "primary.main"
-                          : "secondary.main",
                       color: "white",
                       py: 1,
-                      px: 2,
+                      pr: 1,
                       my: "0.2rem",
                       borderRadius: "1rem",
                       maxWidth: "80%",
@@ -155,6 +172,7 @@ const Chat = () => {
                   >
                     {message.message}
                   </Box>
+                  <div ref={scrollToDiv}></div>
                 </Box>
               ))
             )}
