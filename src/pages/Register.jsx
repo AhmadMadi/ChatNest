@@ -1,5 +1,5 @@
 import { useState, useContext } from "react";
-import { Box, Stack, Typography, TextField, Link } from "@mui/material";
+import { Box, Stack, Typography, TextField } from "@mui/material";
 import { LoadingButton } from "@mui/lab";
 
 import { signUp, signIn } from "../api";
