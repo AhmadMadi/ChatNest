@@ -92,6 +92,7 @@ const Register = () => {
             id="password"
             label="Password"
             variant="outlined"
+            type="password"
             required
           />
           <LoadingButton loading={isLoading} variant="outlined" type="submit">
