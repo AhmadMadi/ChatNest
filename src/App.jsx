@@ -9,7 +9,7 @@ import { CircularProgress, Box } from "@mui/material";
 import { ThemeProvider, createTheme } from "@mui/material/styles";
 import CssBaseline from "@mui/material/CssBaseline";
 
-import Register from "./components/Register";
+import Register from "./pages/Register";
 import Chat from "./pages/Chat";
 import { UserContext } from "./context/UserContext";
 import { auth } from "./config/firebase";
