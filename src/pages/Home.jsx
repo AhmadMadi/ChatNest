@@ -34,10 +34,10 @@ const Home = ({ onGetStarted = () => {} }) => {
         >
           <img src="/assets/logo.svg" alt="chatnest-logo" width="100" />
         </Box>
-        <Typography variant="h5" sx={{ alignSelf: "center", mt: "0.5rem" }}>
+        <Typography variant="h5" sx={{ textAlign: "center", mt: "0.5rem" }}>
           Welcome to ChatNest!
         </Typography>
-        <Typography variant="p" sx={{ alignSelf: "center", pt: "0.5rem" }}>
+        <Typography variant="p" sx={{ textAlign: "center", pt: "0.5rem" }}>
           A chat demo project by AhmadMadi.
         </Typography>
         <Box sx={{ display: "flex", pt: "2rem" }}>
