@@ -1,5 +1,5 @@
 import { useState, useContext } from "react";
-import { Box, Stack, Typography, TextField } from "@mui/material";
+import { Box, Stack, Typography, TextField, Link } from "@mui/material";
 import { LoadingButton } from "@mui/lab";
 import styled from "@emotion/styled";
 
@@ -111,21 +111,18 @@ const Register = () => {
           <LoadingButton loading={isLoading} variant="outlined" type="submit">
             {isSignUp ? "Register" : "Login"}
           </LoadingButton>
-          <Box sx={{ display: "flex", gap: 1 }}>
-            <Typography>
-              {isSignUp ? "Already have an account?" : "No account?"}
-            </Typography>
-            <Typography
+          <Typography>
+            {isSignUp ? "Already have an account?" : "No account?"}
+            {"   "}
+            <Link
               onClick={() => setIsSignUp(!isSignUp)}
               sx={{
                 cursor: "pointer",
-                color: "#0000FF",
-                textDecoration: "underline",
               }}
             >
               Click here.
-            </Typography>
-          </Box>
+            </Link>
+          </Typography>
         </StyledStack>
       </form>
       <Alert
