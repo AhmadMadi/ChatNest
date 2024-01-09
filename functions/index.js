@@ -10,13 +10,13 @@ exports.detectEvilUsers = functions.firestore
   .document("messages/{msgId}")
   .onCreate(async (doc, ctx) => {
     const filter = new Filter();
-    const { message, userId } = doc.data();
+    const { message, uid } = doc.data();
 
     if (filter.isProfane(message)) {
       await doc.ref.update({
         message: `I got BANNED for being naughty.`,
       });
 
-      await db.collection("banned").doc(userId).set({});
+      await db.collection("banned").doc(uid).set({});
     }
   });

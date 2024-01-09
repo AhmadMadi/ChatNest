@@ -70,9 +70,9 @@ const Chat = () => {
   React.useEffect(() => {
     const colors = {};
     fetchedMessages.forEach((message) => {
-      if (userColors[message.userId]) return;
+      if (userColors[message.uid]) return;
 
-      colors[message.userId] = `#${Math.floor(Math.random() * 16777215)
+      colors[message.uid] = `#${Math.floor(Math.random() * 16777215)
         .toString(16)
         .padStart(6, "0")}`;
     });
@@ -89,7 +89,7 @@ const Chat = () => {
     const messageToSend = message;
     setMessage("");
     await addDoc(collection(db, "messages"), {
-      userId: user.uid,
+      uid: user.uid,
       message: messageToSend,
       displayName: user.displayName,
       createdAt: new Date().getTime(),
@@ -152,16 +152,16 @@ const Chat = () => {
                   sx={{
                     display: "flex",
                     justifyContent:
-                      message.userId === user.uid ? "flex-end" : "flex-start",
+                      message.uid === user.uid ? "flex-end" : "flex-start",
                     alignItems: "center",
                   }}
                 >
-                  {message.userId !== user.uid && (
+                  {message.uid !== user.uid && (
                     <Typography
                       sx={{
                         fontWeight: "bold",
                         mr: "0.5rem",
-                        color: userColors[message.userId],
+                        color: userColors[message.uid],
                       }}
                     >
                       {message.displayName}:
