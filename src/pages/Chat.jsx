@@ -19,14 +19,22 @@ import {
   orderBy,
   limit,
 } from "firebase/firestore";
+import { errorCodeMapper } from "../config/firebase";
 import { UserContext } from "../context/UserContext";
 import { signOut } from "../api";
+import Alert from "../components/Alert";
 
 const Chat = () => {
   const [isLoading, setIsLoading] = React.useState(true);
   const [message, setMessage] = React.useState("");
   const [fetchedMessages, setFetchedMessages] = React.useState([]);
   const [userColors, setUserColors] = React.useState({});
+  const [alertData, setAlertData] = React.useState({
+    isOpen: false,
+    type: "",
+    message: "",
+  });
+
   const scrollToDiv = React.useRef();
 
   const { user, setUser } = React.useContext(UserContext);
@@ -88,11 +96,27 @@ const Chat = () => {
     if (message === "") return;
     const messageToSend = message;
     setMessage("");
-    await addDoc(collection(db, "messages"), {
-      uid: user.uid,
-      message: messageToSend,
-      displayName: user.displayName,
-      createdAt: new Date().getTime(),
+
+    try {
+      await addDoc(collection(db, "messages"), {
+        uid: user.uid,
+        message: messageToSend,
+        displayName: user.displayName,
+        createdAt: new Date().getTime(),
+      });
+    } catch (error) {
+      setAlertData({
+        isOpen: true,
+        type: "error",
+        message: errorCodeMapper(error.code),
+      });
+    }
+  };
+
+  const onAlertClose = () => {
+    setAlertData({
+      ...alertData,
+      isOpen: false,
     });
   };
 
@@ -204,6 +228,12 @@ const Chat = () => {
               </Button>
             </Box>
           </form>
+          <Alert
+            isOpen={alertData.isOpen}
+            type={alertData.type}
+            message={alertData.message}
+            onAlertClose={onAlertClose}
+          />
         </Box>
       </Container>
     </>

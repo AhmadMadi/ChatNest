@@ -6,6 +6,9 @@ export const errorCodeMapper = (errorCode) => {
     case "auth/weak-password":
       return "Password should be at least 6 characters";
 
+    case "permission-denied":
+      return "You do not have permission to perform this action";
+
     default:
       return errorCode;
   }
