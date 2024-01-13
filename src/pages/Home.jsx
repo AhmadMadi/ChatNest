@@ -17,9 +17,7 @@ const Home = () => {
   const signInWithGoogle = async () => {
     const provider = new GoogleAuthProvider();
     signInWithPopup(auth, provider).then((response) => {
-      console.log("setting user");
       setUser(response.user);
-      console.log("user set");
     });
   };
 
