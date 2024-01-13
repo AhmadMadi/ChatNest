@@ -1,11 +1,25 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
 import PropTypes from "prop-types";
 
 import { Box, Stack, Typography, Button, Checkbox } from "@mui/material";
 import styled from "@emotion/styled";
 
-const Home = ({ onGetStarted = () => {} }) => {
+import { UserContext } from "../context/UserContext";
+
+import { getAuth, signInWithRedirect, GoogleAuthProvider } from "firebase/auth";
+
+const Home = () => {
   const [isConditionChecked, setIsConditionChecked] = useState(false);
+
+  const { setUser } = useContext(UserContext);
+
+  const signInWithGoogle = async () => {
+    const provider = new GoogleAuthProvider();
+    const auth = getAuth();
+    const response = await signInWithRedirect(auth, provider);
+    setUser(response.user);
+  };
+
   return (
     <Box
       sx={{
@@ -48,13 +62,20 @@ const Home = ({ onGetStarted = () => {} }) => {
           />
           <Typography>I understand I will be banned for bad words.</Typography>
         </Box>
-        <Button
+        {/* <Button
           disabled={!isConditionChecked}
           variant="outlined"
           type="submit"
           onClick={onGetStarted}
         >
           Get started
+        </Button> */}
+        <Button
+          variant="outlined"
+          disabled={!isConditionChecked}
+          onClick={signInWithGoogle}
+        >
+          Sign in with Google
         </Button>
       </StyledStack>
     </Box>

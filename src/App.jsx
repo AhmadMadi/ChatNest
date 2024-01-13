@@ -9,7 +9,6 @@ import { CircularProgress, Box } from "@mui/material";
 import { ThemeProvider, createTheme } from "@mui/material/styles";
 import CssBaseline from "@mui/material/CssBaseline";
 
-import Register from "./pages/Register";
 import Chat from "./pages/Chat";
 import { UserContext } from "./context/UserContext";
 import { auth } from "./config/firebase";
@@ -18,7 +17,6 @@ import Home from "./pages/Home";
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
-  const [isStarted, setIsStarted] = useState(false);
   const { setUser } = useContext(UserContext);
   const darkTheme = createTheme({
     palette: {
@@ -49,12 +47,10 @@ function App() {
           >
             <CircularProgress />
           </Box>
-        ) : !isStarted ? (
-          <Home onGetStarted={() => setIsStarted(true)} />
         ) : isLoggedIn ? (
           <Chat />
         ) : (
-          <Register />
+          <Home />
         )}
       </Box>
     </ThemeProvider>
