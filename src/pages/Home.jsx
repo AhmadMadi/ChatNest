@@ -16,8 +16,9 @@ const Home = () => {
 
   const signInWithGoogle = async () => {
     const provider = new GoogleAuthProvider();
-    const response = await signInWithRedirect(auth, provider);
-    setUser(response.user);
+    signInWithRedirect(auth, provider).then((response) => {
+      setUser(response.user);
+    });
   };
 
   useEffect(() => {
