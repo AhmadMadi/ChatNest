@@ -1,5 +1,6 @@
 import { useState, useContext } from "react";
 import PropTypes from "prop-types";
+import GoogleIcon from "@mui/icons-material/Google";
 
 import { Box, Stack, Typography, Button, Checkbox } from "@mui/material";
 import styled from "@emotion/styled";
@@ -62,20 +63,13 @@ const Home = () => {
           />
           <Typography>I understand I will be banned for bad words.</Typography>
         </Box>
-        {/* <Button
-          disabled={!isConditionChecked}
-          variant="outlined"
-          type="submit"
-          onClick={onGetStarted}
-        >
-          Get started
-        </Button> */}
         <Button
           variant="outlined"
           disabled={!isConditionChecked}
           onClick={signInWithGoogle}
         >
-          Sign in with Google
+          <Typography variant="p">Sign in with</Typography>
+          <GoogleIcon fontSize="small" sx={{ ml: "0.5rem", mb: "0.2rem" }} />
         </Button>
       </StyledStack>
     </Box>
