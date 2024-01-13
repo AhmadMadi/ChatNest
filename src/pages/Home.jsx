@@ -6,7 +6,7 @@ import styled from "@emotion/styled";
 
 import { UserContext } from "../context/UserContext";
 
-import { signInWithRedirect, GoogleAuthProvider } from "firebase/auth";
+import { signInWithPopup, GoogleAuthProvider } from "firebase/auth";
 import { auth } from "../config/firebase";
 
 const Home = () => {
@@ -16,8 +16,10 @@ const Home = () => {
 
   const signInWithGoogle = async () => {
     const provider = new GoogleAuthProvider();
-    signInWithRedirect(auth, provider).then((response) => {
+    signInWithPopup(auth, provider).then((response) => {
+      console.log("setting user");
       setUser(response.user);
+      console.log("user set");
     });
   };
 
