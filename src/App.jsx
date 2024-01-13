@@ -17,20 +17,28 @@ import Home from "./pages/Home";
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
-  const { setUser } = useContext(UserContext);
+  const { user, setUser } = useContext(UserContext);
   const darkTheme = createTheme({
     palette: {
       mode: "dark",
     },
   });
 
+  // useEffect(() => {
+  //   auth.onAuthStateChanged((user) => {
+  //     setIsLoggedIn(!!user);
+  //     setUser(user);
+  //     setIsLoading(false);
+  //   });
+  // }, [setUser]);
+
   useEffect(() => {
-    auth.onAuthStateChanged((user) => {
+    if (user) {
       setIsLoggedIn(!!user);
       setUser(user);
       setIsLoading(false);
-    });
-  }, [setUser]);
+    }
+  }, [user, setUser]);
 
   return (
     <ThemeProvider theme={darkTheme}>
