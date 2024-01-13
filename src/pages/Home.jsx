@@ -1,7 +1,8 @@
 import { useState, useContext, useEffect } from "react";
 import GoogleIcon from "@mui/icons-material/Google";
 
-import { Box, Stack, Typography, Button, Checkbox } from "@mui/material";
+import { Box, Stack, Typography, Checkbox } from "@mui/material";
+import { LoadingButton } from "@mui/lab";
 import styled from "@emotion/styled";
 
 import { UserContext } from "../context/UserContext";
@@ -11,21 +12,22 @@ import { auth } from "../config/firebase";
 
 const Home = () => {
   const [isConditionChecked, setIsConditionChecked] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
 
   const { setUser } = useContext(UserContext);
 
   const signInWithGoogle = async () => {
+    setIsLoading(true);
     const provider = new GoogleAuthProvider();
-    signInWithPopup(auth, provider).then((response) => {
-      setUser(response.user);
-    });
+    signInWithPopup(auth, provider)
+      .then((response) => {
+        setUser(response.user);
+      })
+      .catch((error) => {
+        console.log(error);
+        setIsLoading(false);
+      });
   };
-
-  useEffect(() => {
-    auth.onAuthStateChanged((user) => {
-      setUser(user);
-    });
-  }, [setUser]);
 
   return (
     <Box
@@ -69,14 +71,15 @@ const Home = () => {
           />
           <Typography>I understand I will be banned for bad words.</Typography>
         </Box>
-        <Button
+        <LoadingButton
           variant="outlined"
           disabled={!isConditionChecked}
           onClick={signInWithGoogle}
+          loading={isLoading}
         >
           <Typography variant="p">Sign in with</Typography>
           <GoogleIcon fontSize="small" sx={{ ml: "0.5rem", mb: "0.2rem" }} />
-        </Button>
+        </LoadingButton>
       </StyledStack>
     </Box>
   );
