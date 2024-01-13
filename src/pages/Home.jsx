@@ -78,10 +78,6 @@ const Home = () => {
 
 export default Home;
 
-Home.propTypes = {
-  onGetStarted: PropTypes.func.isRequired,
-};
-
 const StyledStack = styled(Stack)({
   "@media (max-width: 600px)": {
     width: "20rem",
