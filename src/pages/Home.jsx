@@ -1,4 +1,4 @@
-import { useState, useContext } from "react";
+import { useState, useContext, useEffect } from "react";
 import GoogleIcon from "@mui/icons-material/Google";
 
 import { Box, Stack, Typography, Button, Checkbox } from "@mui/material";
@@ -6,7 +6,8 @@ import styled from "@emotion/styled";
 
 import { UserContext } from "../context/UserContext";
 
-import { getAuth, signInWithPopup, GoogleAuthProvider } from "firebase/auth";
+import { signInWithRedirect, GoogleAuthProvider } from "firebase/auth";
+import { auth } from "../config/firebase";
 
 const Home = () => {
   const [isConditionChecked, setIsConditionChecked] = useState(false);
@@ -15,10 +16,15 @@ const Home = () => {
 
   const signInWithGoogle = async () => {
     const provider = new GoogleAuthProvider();
-    const auth = getAuth();
-    const response = await signInWithPopup(auth, provider);
+    const response = await signInWithRedirect(auth, provider);
     setUser(response.user);
   };
+
+  useEffect(() => {
+    auth.onAuthStateChanged((user) => {
+      setUser(user);
+    });
+  }, [setUser]);
 
   return (
     <Box
