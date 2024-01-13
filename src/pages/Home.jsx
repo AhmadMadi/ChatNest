@@ -1,5 +1,4 @@
 import { useState, useContext } from "react";
-import PropTypes from "prop-types";
 import GoogleIcon from "@mui/icons-material/Google";
 
 import { Box, Stack, Typography, Button, Checkbox } from "@mui/material";
@@ -7,7 +6,7 @@ import styled from "@emotion/styled";
 
 import { UserContext } from "../context/UserContext";
 
-import { getAuth, signInWithRedirect, GoogleAuthProvider } from "firebase/auth";
+import { getAuth, signInWithPopup, GoogleAuthProvider } from "firebase/auth";
 
 const Home = () => {
   const [isConditionChecked, setIsConditionChecked] = useState(false);
@@ -17,7 +16,7 @@ const Home = () => {
   const signInWithGoogle = async () => {
     const provider = new GoogleAuthProvider();
     const auth = getAuth();
-    const response = await signInWithRedirect(auth, provider);
+    const response = await signInWithPopup(auth, provider);
     setUser(response.user);
   };
 
